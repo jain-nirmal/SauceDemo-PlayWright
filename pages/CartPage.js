@@ -45,7 +45,7 @@ class cartPage {
         const productCount = await this.productListItem.count();
         if (productCount === 0) {
 
-            console.log("Cart is empty, no products to remove");
+            console.log("Cart is empty, no product/s is present to remove");
             return;
 
         }

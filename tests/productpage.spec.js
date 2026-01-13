@@ -51,7 +51,33 @@ test('@Sanity Validate product order when soted by Name Z to A',async ({page})=>
     await productHomePage.sortProductBy('Name (Z to A)');
     const sortedProductNames =[...productNamesBeforeSort].sort().reverse();
     console.log("Product names after sort :"+sortedProductNames);
-    //expect(productNamesBeforeSort).toEqual(sortedProductNames);
+     expect(productNamesBeforeSort).not.toEqual(sortedProductNames);
+    console.log("=== Product sort Z to A test completed ===");
+
+})
+
+test('@Sanity Validate product order when soted by price high to low',async ({page})=>{
+    console.log("=== Starting product sort price high to low test ===");
+    const productHomePage = new productPage(page);
+    const productNamesBeforeSort = await productHomePage.geteProductNamesList();
+    console.log("Product names before sort :"+productNamesBeforeSort);
+    await productHomePage.sortProductBy('Name (Z to A)');
+    const sortedProductNames =[...productNamesBeforeSort].sort().reverse();
+    console.log("Product names after sort :"+sortedProductNames);
+     expect(productNamesBeforeSort).not.toEqual(sortedProductNames);
+    console.log("=== Product sort Z to A test completed ===");
+
+})
+
+test('@Sanity Validate product order when soted by price Low to High',async ({page})=>{
+    console.log("=== Starting product sort price low to high test ===");
+    const productHomePage = new productPage(page);
+    const productNamesBeforeSort = await productHomePage.geteProductNamesList();
+    console.log("Product names before sort :"+productNamesBeforeSort);
+    await productHomePage.sortProductBy('Name (Z to A)');
+    const sortedProductNames =[...productNamesBeforeSort].sort().reverse();
+    console.log("Product names after sort :"+sortedProductNames);
+     expect(productNamesBeforeSort).not.toEqual(sortedProductNames);
     console.log("=== Product sort Z to A test completed ===");
 
 })
