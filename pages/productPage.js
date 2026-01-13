@@ -1,0 +1,87 @@
+const { expect } = require("../playwright.config");
+
+class productPage{
+    constructor(page){
+        console.log("=== Initializing productPage ===");
+        this.page=page;
+        this.menuIcon=page.locator('#react-burger-menu-btn');
+        this.logOutLink=page.locator('#logout_sidebar_link');
+        this.AboutLink=page.locator('#about_sidebar_link');
+        this.requestDemoButton=page.locator('button:has-text("Request a demo")');
+        this.tryFreebutton=page.locator('button:has-text("Try it free")');
+        this.productCard=page.locator('.inventory_item');
+        this.productName=page.locator('.inventory_item_name');
+        this.shoppingCartLink=page.locator('.shopping_cart_link');
+        this.SortDropdown=page.locator('.product_sort_container');
+        console.log("productPage initialized successfully");
+} 
+    async logOutFromApplication(){
+        console.log("=== Logging out from application ===");
+        await this.menuIcon.click();
+        console.log("Menu icon clicked");
+        await this.logOutLink.click();
+        console.log("Logout link clicked");
+        await this.page.waitForLoadState('networkidle');
+        console.log("Logged out successfully");
+       
+
+}
+    async navigateToAboutPage(){
+        console.log("=== Navigating to About page ===");
+        await this.menuIcon.click();
+        console.log("Menu icon clicked");
+        await this.AboutLink.click();
+        console.log("About link clicked");
+     
+    }
+
+    getRequestDemoButton(){
+        return this.requestDemoButton;
+    }
+
+    getFreeTryButton(){
+        return this.tryFreebutton;
+    }
+
+    async addProductToCart(productName){   
+        console.log("=== Adding product to cart: " + productName + " ===");
+        const productCount=await this.productCard.count();
+        console.log("Total products on page: " + productCount);
+        for(let i=0;i<productCount;i++){
+            const prodName=await this.productName.nth(i).textContent(); 
+            if(prodName.trim()===productName){
+                console.log("Product found at index: " + i);
+                await this.productCard.nth(i).locator('button:has-text("Add to cart")').click();
+                console.log("Product added to cart successfully");
+                break;
+            }
+        }
+    }
+
+    async getShoppingCartProductCount(){
+        console.log("=== Getting shopping cart product count ===");
+        const count = parseInt(await this.shoppingCartLink.locator('.shopping_cart_badge').textContent());
+        console.log("Products in cart: " + count);
+        return count;
+    }
+
+    async clickOnShoppingCartLink(){
+        console.log("=== Clicking on shopping cart link ===");
+        await this.shoppingCartLink.click();
+        console.log("Shopping cart link clicked successfully");
+    }
+
+    async sortProductBy(optionText){
+    console.log("Sorting products by :"+optionText);
+    await this.SortDropdown.selectOption({label:optionText});
+    }
+    async geteProductNamesList(){
+        return await this.productName.allTextContents();
+    }
+    
+
+
+}
+
+
+module.exports={productPage};
