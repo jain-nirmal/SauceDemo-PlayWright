@@ -14,12 +14,29 @@ test.beforeEach(async ({ page }) => {
     console.log("=== Test setup completed ===");
 })
 
-test('@addToCart @Sanity Add single product to cart and verify in cart page', async ({ page }) => {
+test('@AddToCart @Sanity Add single product to cart and verify in cart page', async ({ page }) => {
     console.log("=== Starting Add to Cart test ===");
-    const ProductName = "Sauce Labs Backpack";
+    const productName = "Sauce Labs Backpack";
     const product = new productPage(page);
     const cart = new cartPage(page);
-    await product.addProductToCart(ProductName);
+    await product.addProductToCart(productName);
+    const cartCount = await product.getShoppingCartProductCount();
+    expect(cartCount).toBeGreaterThan(0);
+    console.log("Product added to cart successfully");
+    await product.shoppingCartLink.click();
+    console.log("Shopping cart link clicked");
+    const isProductInCart = await cart.validateProducInCart(ProductName);
+    expect(isProductInCart).toBeTruthy();
+    console.log("=== Add to Cart test completed ===");
+
+})
+
+test('@AddToCart @Sanity Add multiplygit product to cart and verify in cart page', async ({ page }) => {
+    console.log("=== Starting Add to Cart test ===");
+    const productName = "Sauce Labs Backpack";
+    const product = new productPage(page);
+    const cart = new cartPage(page);
+    await product.addProductToCart(productName);
     const cartCount = await product.getShoppingCartProductCount();
     expect(cartCount).toBeGreaterThan(0);
     console.log("Product added to cart successfully");
