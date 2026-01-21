@@ -1,5 +1,5 @@
 
-class cartPage {
+class CartPage {
     constructor(page) {
         console.log("=== Initializing cartPage ===");
         this.page = page;
@@ -7,11 +7,15 @@ class cartPage {
         this.productListItem = this.page.locator('.cart_item');
         this.continueShoppingButton = this.page.locator('#continue-shopping');
         this.checkoutButton = this.page.locator('#checkout');
+        this.yourCartTitle = this.page.locator('.title');
+        this.productName=page.locator('.inventory_item_name');
+        this.productDescription=page.locator('.inventory_item_desc');
+        this.productPrice=page.locator('.inventory_item_price');
         console.log("cartPage initialized successfully");
     }
 
 
-    async validateProducInCart(productName) {
+    async validateProductInCart(productName) {
         console.log("=== Validating product in cart: " + productName + " ===");
         const productCount = await this.productListItem.count();
         console.log("Total products in cart: " + productCount);
@@ -39,7 +43,7 @@ class cartPage {
         console.log("Checkout clicked successfully");
     }
 
-    async removeProductFromCart() {
+    async removeButtonFromCart() {
         console.log("=== Starting to remove products from cart ===");
 
         const productCount = await this.productListItem.count();
@@ -62,7 +66,19 @@ class cartPage {
         }
         console.log("All products removed from cart");
     }
-}
 
-module.exports = { cartPage };
+
+    isYourCartTitleVisible() {     
+
+        return this.yourCartTitle.isVisible();}
+    
+
+    async getFirstProuctDetails() 
+    {
+
+
+    }
+
+}
+module.exports = { CartPage };
   

@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
-import {loginPage} from '../pages/loginPage';
-import {productPage} from '../pages/productPage';
+import {loginPage} from '../pages/LoginPage';
+import {productPage} from '../pages/ProductPage';
 import { BaseURL, Username, Password } from '../utils/envConfig';  
 
 test.beforeEach(async ({page})=>{

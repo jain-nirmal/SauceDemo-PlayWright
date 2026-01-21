@@ -1,4 +1,4 @@
-class loginPage{
+class LoginPage{
     constructor(page){
         console.log("=== Initializing loginPage ===");
         this.page=page;
@@ -122,4 +122,4 @@ class loginPage{
     }
 
 }
-module.exports={loginPage};
+module.exports={LoginPage};

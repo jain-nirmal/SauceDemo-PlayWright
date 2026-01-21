@@ -1,6 +1,6 @@
 const { expect } = require("../playwright.config");
 
-class productPage{
+class ProductPage{
     constructor(page){
         console.log("=== Initializing productPage ===");
         this.page=page;
@@ -13,6 +13,8 @@ class productPage{
         this.productName=page.locator('.inventory_item_name');
         this.shoppingCartLink=page.locator('.shopping_cart_link');
         this.SortDropdown=page.locator('.product_sort_container');
+        this.productDescription=page.locator('.inventory_item_desc');
+        this.productPrice=page.locator('.inventory_item_price');
         console.log("productPage initialized successfully");
 } 
     async logOutFromApplication(){
@@ -78,10 +80,53 @@ class productPage{
     async geteProductNamesList(){
         return await this.productName.allTextContents();
     }
-    
 
+    async getFirstProductDetails(){
+        const name = await this.productName.first().textContent();
+        const description = await this.productDescription.first().textContent();
+        const price = await this.productPrice.first().textContent();
+        return { name:name?.trim(), description:description?.trim(), price:price?.trim() };
+
+    }
+
+    async getAllProductDetails()
+    {
+        const allNames = await this.productName.allTextContents();
+        const allDescriptions = await this.productDescription.allTextContents();
+        const allprices = await this.productPrice.allTextContents();
+
+        const allproducts = [];
+        for (let i = 0; i < allNames.length; i++) {
+            allproducts.push({
+                name: allNames[i].trim(),
+                description: allDescriptions[i].trim(),
+                price: allprices[i].trim()
+            });
+        }
+
+        return allproducts;
+
+    }
+
+    async getSpecificProductDetails(productName){
+
+ const allNames = await this.productName.allTextContents();
+        const allDescriptions = await this.productDescription.allTextContents();
+        const allprices = await this.productPrice.allTextContents();
+
+        const allproducts = [];
+        for (let i = 0; i < allNames.length; i++) {
+            allproducts.push({
+                name: allNames[i].trim(),
+                description: allDescriptions[i].trim(),
+                price: allprices[i].trim()
+            });
+        }
+
+        return allproducts.filter(product => product.name.includes(productName));
+}
 
 }
 
 
-module.exports={productPage};
+module.exports={ProductPage};
