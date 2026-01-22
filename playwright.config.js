@@ -5,8 +5,7 @@ const { permission } = require('node:process');
 
 const config = {
   testDir: './tests',
-  fullyparallel: true,
-  workers: 4,
+  workers: 1,
  
 
   
@@ -22,9 +21,9 @@ const config = {
 
   projects :[
     {
-      name: 'chrome',
+      name: 'Chrome',
       use: { browserName : 'chromium',
-        headless: true,
+        headless: false,
         screenshot : 'on',
         trace : 'on',//off,on  
         ignoreHTTPSErrors: true,
@@ -32,27 +31,7 @@ const config = {
       
        
       }
-       },
-    
-    {
-      name: 'firefox',
-      use: { browserName : 'firefox',
-        headless: true,
-        screenshot : 'on',
-        trace : 'on',//off,on  
-      } },
-    
-    {
-      name: 'Safari',
-      use: { browserName : 'webkit',
-        headless: false,
-        screenshot : 'on',
-        trace : 'off',//off,on  
-        ...devices['iPhone 13']
-      } },
-    
-  ]
-  
+       }]
 
 
 };

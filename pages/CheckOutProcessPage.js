@@ -1,23 +1,17 @@
-class CheckOutPage{
+class CheckOutProcessPage {
+    constructor(page) {
+        this.page = page;
+        this.title = this.page.locator('.title');
+        this.firstNameInput = this.page.locator('#first-name');
+        this.lastNameInput = this.page.locator('#last-name');
+        this.postalCodeInput = this.page.locator('#postal-code');
+        this.continueButton = this.page.locator('#continue');
+        this.cancelButton = this.page.locator('#cancel');
+        console.log("OrderProcessPage initialized successfully");
+    }
 
 
- constructor(page) {
-
-    console.log("=== Initializing CheckOutPage ===");
-    this.page = page;
-    this.title = this.page.locator('.title');
-    this.firstNameInput = this.page.locator('#first-name');
-    this.lastNameInput = this.page.locator('#last-name');
-    this.postalCodeInput = this.page.locator('#postal-code');
-    this.continueButton = this.page.locator('#continue');
-    this.cancelButton = this.page.locator('#cancel');
-
-
-
-
-}
-
-  async clickCancelButton() {
+      async clickCancelButton() {
     console.log("=== Clicking Cancel button on Checkout Page ===");
     await this.cancelButton.click();
     console.log("Cancel button clicked successfully");
@@ -62,8 +56,6 @@ async getCheckOutElement(){
     }
 }
 
-}
 
 
-
-module.exports={CheckOutPage};
+} module.exports={CheckOutProcessPage};

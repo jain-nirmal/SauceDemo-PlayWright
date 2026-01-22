@@ -73,7 +73,7 @@ test.describe('@ CartPage Cart Page Tests', () =>
     expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
 
     console.log("=== Continue Shopping test completed ===");
-    })
+  })
 
 
     test('@CartPag @Sanity Validate Remove product from cart', async ({ page }) => 
