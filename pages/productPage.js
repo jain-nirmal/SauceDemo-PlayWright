@@ -60,6 +60,14 @@ class ProductPage{
         }
     }
 
+    async addFirstNProductsToCart(){
+        console.log("=== Adding first two products to cart ===");
+        const firstProduct=await this.productName.first().textContent;
+        console.log("First product name: " + firstProduct);
+          await this.productCard.first().locator('button:has-text("Add to cart")').click();
+                console.log("Product added to cart successfully");
+    }
+
     async getShoppingCartProductCount(){
         console.log("=== Getting shopping cart product count ===");
         const count = parseInt(await this.shoppingCartLink.locator('.shopping_cart_badge').textContent());
