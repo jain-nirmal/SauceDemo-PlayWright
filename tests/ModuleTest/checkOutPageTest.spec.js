@@ -32,7 +32,7 @@ test.describe('@Checkout  Checkout Page Tests validation', () => {
         console.log("=== Test setup completed ===");
     })
 
-    test.only('@Sanity @Checkout Validate Checkout Page Title , Continue , Cancel Button ', async ({ page }) => {
+    test('@Sanity @Checkout Validate Checkout Page Title , Continue , Cancel Button ', async ({ page }) => {
         console.log("=== Starting Checkout Page UI Validation test ===");
 
         await cartPage.checkoutButton.click();

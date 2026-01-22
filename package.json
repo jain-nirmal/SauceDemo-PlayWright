@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:allure": "playwright test && allure generate allure-results --clean -o allure-report",
+    "allure:report": "allure open allure-report"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
