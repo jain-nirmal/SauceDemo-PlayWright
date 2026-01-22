@@ -6,6 +6,7 @@ import { CheckOutProcessPage } from '../../pages/CheckOutProcessPage';
 import { BaseURL, Username, Password } from '../../utils/envConfig';
 
 
+
 test.describe('@Checkout  Checkout Page Tests validation', () => 
     {
     let productPage;
@@ -32,7 +33,7 @@ test.describe('@Checkout  Checkout Page Tests validation', () =>
         console.log("=== Test setup completed ===");
   })
 
-    test.only('@Sanity @Checkout Validate Checkout Page Title , Continue , Cancel Button ', async ({ page }) =>    {
+    test('@Sanity @Checkout Validate Checkout Page Title , Continue , Cancel Button ', async ({ page }) =>    {
     console.log("=== Starting Checkout Page UI Validation test ===");
     await cartPage.checkoutButton.click();
     await checkOutProcessPage.page.waitForLoadState('networkidle');
@@ -44,7 +45,7 @@ test.describe('@Checkout  Checkout Page Tests validation', () =>
     console.log("=== Checkout Page UI Validation test completed ===");
 })
 
-test.only('@SmokeTesting @Checkout Validate Cancel Button functionality', async ({ page }) =>
+test('@SmokeTesting @Checkout Validate Cancel Button functionality', async ({ page }) =>
 
     {
     console.log("=== Starting Cancel Button Functionality test ===");
@@ -57,6 +58,20 @@ test.only('@SmokeTesting @Checkout Validate Cancel Button functionality', async 
     expect(cartPage.continueShoppingButton).toBeVisible();
     expect(cartPage.checkoutButton).toBeVisible();
     console.log("=== Cancel Button Functionality test completed ===");
+    })
+
+
+    test('@SmokeTesting @Checkout Validate Continue Button functionality', async ({ page }) =>
+
+    {
+        await cartPage.checkoutButton.click();
+        await checkOutProcessPage.page.waitForLoadState('networkidle');
+    console.log("=== Starting Continue Button Functionality test ===");
+    await checkOutProcessPage.enterCheckOutInformation("John","Doe","12345");
+    await checkOutProcessPage.clickContinueButton();
+    await page.waitForLoadState('networkidle');
+    expect(page).toHaveURL('https://www.saucedemo.com/checkout-step-two.html');
+    console.log("=== Continue Button Functionality test completed ===");
     })
 
 })
