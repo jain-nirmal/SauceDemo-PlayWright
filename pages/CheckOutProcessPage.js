@@ -7,6 +7,7 @@ class CheckOutProcessPage {
         this.postalCodeInput = this.page.locator('#postal-code');
         this.continueButton = this.page.locator('#continue');
         this.cancelButton = this.page.locator('#cancel');
+        this.actualErrorMessage = this.page.locator('h3[data-test="error"]');
         console.log("OrderProcessPage initialized successfully");
     }
 
@@ -54,6 +55,14 @@ async getCheckOutElement(){
         cancelButton:this.cancelButton,
         continueButton:this.continueButton
     }
+}
+
+async getErrorMessage(){
+
+    console.log("=== Getting error message on Checkout Page ===");
+    const errorMessageText = await this.actualErrorMessage.textContent();
+    console.log("Error message: " + errorMessageText);
+    return errorMessageText;
 }
 
 
