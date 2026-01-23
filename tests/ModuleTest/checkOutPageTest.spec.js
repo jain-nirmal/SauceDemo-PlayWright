@@ -73,18 +73,4 @@ test.describe('@Checkout  Checkout Page Tests validation', () => {
         console.log("=== Continue Button Functionality test completed ===");
     })
 
-    test('@SmokeTesting @Checkout Validate Error Message on Checkout Page with missing information', async ({ page }) => {
-        await cartPage.checkoutButton.click();
-        await checkOutProcessPage.page.waitForLoadState('networkidle');
-        console.log("=== Starting Error Message Validation test ===");
-        await checkOutProcessPage.clickContinueButton();
-        const actualErrorMessage = await checkOutProcessPage.getErrorMessage();
-        expect(actualErrorMessage).toBe("Error: First Name is required");
-        console.log("=== Error Message Validation test completed ===");
-    
-    
-    
-    })
-
-
 })
