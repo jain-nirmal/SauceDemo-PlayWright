@@ -15,6 +15,7 @@ class ProductPage{
         this.SortDropdown=page.locator('.product_sort_container');
         this.productDescription=page.locator('.inventory_item_desc');
         this.productPrice=page.locator('.inventory_item_price');
+        this.pageTitle=page.locator('.title');
         console.log("productPage initialized successfully");
 } 
     async logOutFromApplication(){
@@ -132,6 +133,14 @@ class ProductPage{
         }
 
         return allproducts.filter(product => product.name.includes(productName));
+}
+
+async getProductTitle(){
+    console.log("=== Getting Product Page title ===");
+    const titleText = await this.pageTitle.textContent();
+    console.log("Product Page title: " + titleText);
+    return titleText;
+
 }
 
 }

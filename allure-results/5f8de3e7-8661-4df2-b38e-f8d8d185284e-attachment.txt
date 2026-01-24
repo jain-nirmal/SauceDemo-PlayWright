@@ -1,0 +1,20 @@
+=== Test setup: beforeEach ===
+=== Initializing productPage ===
+productPage initialized successfully
+=== Initializing loginPage ===
+loginPage initialized successfully
+Navigated to: https://www.saucedemo.com
+=== Starting login process ===
+=== Entering username ===
+Username: standard_user
+Username filled successfully
+=== Entering password ===
+Password filled successfully
+=== Clicking login button ===
+Login button clicked
+Page loaded successfully after login
+=== Test setup completed ===
+=== Starting product sort test ===
+Product names before sort :Sauce Labs Backpack,Sauce Labs Bike Light,Sauce Labs Bolt T-Shirt,Sauce Labs Fleece Jacket,Sauce Labs Onesie,Test.allTheThings() T-Shirt (Red)
+Sorting products by :Name (A to Z)
+=== Product sort test completed ===
