@@ -1,0 +1,6 @@
+=== Initializing loginPage ===
+loginPage initialized successfully
+=== Initializing productPage ===
+productPage initialized successfully
+=== Initializing cartPage ===
+cartPage initialized successfully

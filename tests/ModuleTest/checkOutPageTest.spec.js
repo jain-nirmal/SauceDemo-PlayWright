@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/LoginPage';
-import { ProductPage } from '../../pages/ProductPage';
+import { ProductPage } from '../../pages/productPage';
 import { CartPage } from '../../pages/CartPage';
-import { OrderProcess } from '../../pages/OrderProces';
+import { OrderProcess } from '../../pages/OrderProcess';
 import { BaseURL, Username, Password } from '../../utils/envConfig';
 const testData = require('../../testdata/checkOutTestData.json')
 
