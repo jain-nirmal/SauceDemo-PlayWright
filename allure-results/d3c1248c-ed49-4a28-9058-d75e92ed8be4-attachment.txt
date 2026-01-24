@@ -1,0 +1,19 @@
+=== Initializing loginPage ===
+loginPage initialized successfully
+=== Navigating to login page ===
+=== Page launched sucessfully===
+=== Test setup: beforeEach ===
+=== Test: Login with empty username field ===
+=== Entering username ===
+Username: 
+Username filled successfully
+=== Entering password ===
+Password filled successfully
+=== Clicking login button ===
+Login button clicked
+=== Checking if error message is visible ===
+Error message visible: true
+=== Getting error message ===
+Navigated to: https://www.saucedemo.com
+Error message: Epic sadface: Username is required
+=== Test PASSED: Error message displayed for empty username ===
