@@ -44,7 +44,7 @@ class CartPage {
     }
 
     async removeButtonFromCart() {
-        console.log("=== Starting to remove products from cart ===");
+        console.log("=== Starting to remove products from cart ===");   
 
         const productCount = await this.productListItem.count();
         if (productCount === 0) {

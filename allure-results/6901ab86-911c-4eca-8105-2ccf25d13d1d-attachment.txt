@@ -1,0 +1,19 @@
+=== Initializing loginPage ===
+loginPage initialized successfully
+=== Initializing productPage ===
+productPage initialized successfully
+=== Initializing cartPage ===
+cartPage initialized successfully
+OrderProcessPage initialized successfully
+OrderReviewPage initialized successfully
+OrderConfirmation Page initialized successfully
+Navigated to: https://www.saucedemo.com
+=== Starting login process ===
+=== Entering username ===
+Username: standard_user
+Username filled successfully
+=== Entering password ===
+Password filled successfully
+=== Clicking login button ===
+Login button clicked
+Page loaded successfully after login
