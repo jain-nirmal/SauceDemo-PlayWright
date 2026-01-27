@@ -156,15 +156,34 @@ class ProductPage {
         }
     }
 
-    async removeProductFromProductPage(){
+    async removeProductFromProductPage() {
         console.log("=== Removing all products from product page ===");
-        const cartCount=await this.getShoppingCartProductCount();
-        for(let i=0;i<cartCount;i++){
+        const cartCount = await this.getShoppingCartProductCount();
+        for (let i = 0; i < cartCount; i++) {
             await this.removeButton.nth(i).click();
+
+        }
+    }
+
+
+    async addAllProductsToCart() {
+
+    //  console.log("=== Adding product to cart: " + productName + " ===");
+        const productCount = await this.productCard.count();
+        console.log("Total products on page: " + productCount);
+        for (let i = 0; i < productCount; i++) {
+            const prodName = await this.productName.nth(i).textContent();
+
+            console.log("Product found at index: " + i);
+            await this.productCard.nth(i).locator('button:has-text("Add to cart")').click();
+            console.log(prodName+'Product added to cart successfully');
+          
+
+        }
+
 
     }
 
-}
 }
 
 module.exports = { ProductPage };

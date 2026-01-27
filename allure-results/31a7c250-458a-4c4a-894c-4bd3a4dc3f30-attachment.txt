@@ -1,0 +1,31 @@
+=== Initializing loginPage ===
+loginPage initialized successfully
+=== Initializing productPage ===
+productPage initialized successfully
+=== Initializing cartPage ===
+cartPage initialized successfully
+OrderProcessPage initialized successfully
+OrderReviewPage initialized successfully
+OrderConfirmation Page initialized successfully
+Navigated to: https://www.saucedemo.com
+=== Starting login process ===
+=== Entering username ===
+Username: standard_user
+Username filled successfully
+=== Entering password ===
+Password filled successfully
+=== Clicking login button ===
+Login button clicked
+Page loaded successfully after login
+=== Adding product to cart: Sauce Labs Backpack ===
+Total products on page: 6
+Product found at index: 0
+Product added to cart successfully
+=== Clicking Checkout button ===
+Checkout clicked successfully
+=== Entering checkout information ===
+First Name: John
+Last Name: Doe
+Postal Code: 12345
+Checkout information entered successfully
+Clicking on Finish Button
