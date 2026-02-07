@@ -23,73 +23,109 @@ test.describe('@ CartPage Cart Page Tests', () =>
   })
 
   test('@SmokeTesting @CartPage @Sanity Validate product title ,Continue , Remove , Url on cart page', async ({ page }) =>    {
-    console.log("=== Starting Cart Page UI Validation test ===");
-    const productName = "Sauce Labs Backpack"
-    productPage.addProductToCart(productName);
-    await page.waitForLoadState('networkidle');
-    const cartCount = await productPage.getShoppingCartProductCount();
-    console.log("Shopping cart product count: " + cartCount);
-    expect(cartCount).toBeGreaterThan(0);
-    await productPage.shoppingCartLink.click();
-    await cartPage.page.waitForLoadState('networkidle');
-    expect(page).toHaveURL('https://www.saucedemo.com/cart.html');
-    expect(cartPage.yourCartTitle).toBeVisible();
-    expect(cartPage.continueShoppingButton).toBeVisible();
-    expect(cartPage.checkoutButton).toBeVisible();
-    console.log("=== Cart Page UI Validation test completed ===");
-     
+    await test.step('Add product to cart', async () => {
+        console.log("=== Starting Cart Page UI Validation test ===");
+        const productName = "Sauce Labs Backpack";
+        productPage.addProductToCart(productName);
+        await page.waitForLoadState('networkidle');
+    });
+
+    await test.step('Verify cart count is greater than 0', async () => {
+        const cartCount = await productPage.getShoppingCartProductCount();
+        console.log("Shopping cart product count: " + cartCount);
+        expect(cartCount).toBeGreaterThan(0);
+    });
+
+    await test.step('Navigate to cart page', async () => {
+        await productPage.shoppingCartLink.click();
+        await cartPage.page.waitForLoadState('networkidle');
+    });
+
+    await test.step('Verify cart page URL and UI elements', async () => {
+        expect(page).toHaveURL('https://www.saucedemo.com/cart.html');
+        expect(cartPage.yourCartTitle).toBeVisible();
+        expect(cartPage.continueShoppingButton).toBeVisible();
+        expect(cartPage.checkoutButton).toBeVisible();
+        console.log("=== Cart Page UI Validation test completed ===");
+    });
   })
 
   
   test('@SmokeTesting @CartPag @Sanity Add  product to cart and verify in cart page', async ({ page }) => 
     {
-    console.log("=== Starting Add to Cart test ===");
-    const productName = "Sauce Labs Backpack";
+    await test.step('Add Sauce Labs Backpack to cart', async () => {
+        console.log("=== Starting Add to Cart test ===");
+        const productName = "Sauce Labs Backpack";
+        await productPage.addProductToCart(productName);
+    });
 
-    await productPage.addProductToCart(productName);
-    const cartCount = await productPage.getShoppingCartProductCount();
-    expect(cartCount).toBeGreaterThan(0);
-    console.log("Product added to cart successfully");
-    await productPage.shoppingCartLink.click();
-    console.log("Shopping cart link clicked");
-    const isProductInCart = await cartPage.validateProductInCart(productName);
-    expect(isProductInCart).toBeTruthy();
-    console.log("=== Add to Cart test completed ===");
+    await test.step('Verify cart count is greater than 0', async () => {
+        const cartCount = await productPage.getShoppingCartProductCount();
+        expect(cartCount).toBeGreaterThan(0);
+        console.log("Product added to cart successfully");
+    });
 
+    await test.step('Navigate to cart page', async () => {
+        await productPage.shoppingCartLink.click();
+        console.log("Shopping cart link clicked");
+    });
+
+    await test.step('Verify product is displayed in cart', async () => {
+        const productName = "Sauce Labs Backpack";
+        const isProductInCart = await cartPage.validateProductInCart(productName);
+        expect(isProductInCart).toBeTruthy();
+        console.log("=== Add to Cart test completed ===");
+    });
 
     })
 
     test('@CartPag @Sanity Validate Continue shopping move to productpage', async ({ page }) => 
     {
 
-    console.log("=== Starting Continue Shopping test ===");
-   
-    console.log("=== Starting Cart Page UI Validation test ===");
-    const productName = "Sauce Labs Backpack"
-    productPage.addProductToCart(productName);
-    await productPage.shoppingCartLink.click();
-    await cartPage.page.waitForLoadState('networkidle');
-    await cartPage.clickOnContinueShopping();
-    expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+    await test.step('Add product to cart and navigate to cart page', async () => {
+        console.log("=== Starting Continue Shopping test ===");
+        console.log("=== Starting Cart Page UI Validation test ===");
+        const productName = "Sauce Labs Backpack";
+        productPage.addProductToCart(productName);
+        await productPage.shoppingCartLink.click();
+        await cartPage.page.waitForLoadState('networkidle');
+    });
 
-    console.log("=== Continue Shopping test completed ===");
+    await test.step('Click Continue Shopping button', async () => {
+        await cartPage.clickOnContinueShopping();
+    });
+
+    await test.step('Verify redirect to inventory page', async () => {
+        expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+        console.log("=== Continue Shopping test completed ===");
+    });
   })
 
 
     test('@CartPag @Sanity Validate Remove product from cart', async ({ page }) => 
     {
-        console.log("=== Starting Remove Product from Cart test ===");
-        const productName = "Sauce Labs Backpack"
-        await productPage.addProductToCart(productName);
-         await productPage.shoppingCartLink.click();
-          const initialCartCount = await productPage.getShoppingCartProductCount();
-             expect(initialCartCount).toBeGreaterThan(0);
-             
-             cartPage.removeButtonFromCart();
-             const finalCartCount = initialCartCount - 1;
-             console.log("Final cart count after removal: " + finalCartCount);
-        expect(initialCartCount).not.toBe(finalCartCount);
+        await test.step('Add product to cart', async () => {
+            console.log("=== Starting Remove Product from Cart test ===");
+            const productName = "Sauce Labs Backpack";
+            await productPage.addProductToCart(productName);
+        });
 
+        await test.step('Navigate to cart page and verify initial count', async () => {
+            await productPage.shoppingCartLink.click();
+            const initialCartCount = await productPage.getShoppingCartProductCount();
+            expect(initialCartCount).toBeGreaterThan(0);
+        });
+
+        await test.step('Remove product from cart', async () => {
+            cartPage.removeButtonFromCart();
+        });
+
+        await test.step('Verify cart count decreased', async () => {
+            const initialCartCount = await productPage.getShoppingCartProductCount();
+            const finalCartCount = initialCartCount - 1;
+            console.log("Final cart count after removal: " + finalCartCount);
+            expect(initialCartCount).not.toBe(finalCartCount);
+        });
     })
 
 

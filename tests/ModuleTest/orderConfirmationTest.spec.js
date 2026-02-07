@@ -43,23 +43,33 @@ test.describe('@OrderReview Order Confirmation Page Tests validation', () => {
     })
 
     test('@Smoke @OrderConfirmation Validate Order Confirmation Page Title , Confirmation Text , Back Home Button ', async ({ page }) => {
-        console.log("=== Starting Order Confirmation Page UI Validation test ===");   
-        expect(page).toHaveURL('https://www.saucedemo.com/checkout-complete.html');
-        const allElements=await orderConfirmationPage.getAllElements();
-        expect(allElements.pageTitle).toBeVisible();
-        expect(allElements.confirmationText).toBeVisible();
-        expect(allElements.backHomeButton).toBeVisible();
-        console.log("=== Order Confirmation Page UI Validation test completed ===");
+        await test.step('Verify order confirmation page URL', async () => {
+            console.log("=== Starting Order Confirmation Page UI Validation test ===");   
+            expect(page).toHaveURL('https://www.saucedemo.com/checkout-complete.html');
+        });
+
+        await test.step('Verify order confirmation page elements are visible', async () => {
+            const allElements=await orderConfirmationPage.getAllElements();
+            expect(allElements.pageTitle).toBeVisible();
+            expect(allElements.confirmationText).toBeVisible();
+            expect(allElements.backHomeButton).toBeVisible();
+            console.log("=== Order Confirmation Page UI Validation test completed ===");
+        });
     })
 
     test('@Smoke @OrderConfirmation Validate Back Home button navigated to product home page  ', async ({ page }) => {
-        console.log("=== Starting Order Confirmation Page Back Home Button test ===");   
-        await orderConfirmationPage.clickBackHomeButton();
-        await page.waitForTimeout(5000)
-        await orderConfirmationPage.page.waitForLoadState('networkidle');
-        expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
-        expect(productPage.pageTitle).toBeVisible();
-        console.log("=== Order Confirmation Page Back Home Button test completed ===");
+        await test.step('Click Back Home button', async () => {
+            console.log("=== Starting Order Confirmation Page Back Home Button test ===");   
+            await orderConfirmationPage.clickBackHomeButton();
+            await page.waitForTimeout(5000);
+            await orderConfirmationPage.page.waitForLoadState('networkidle');
+        });
+
+        await test.step('Verify redirect to product home page', async () => {
+            expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+            expect(productPage.pageTitle).toBeVisible();
+            console.log("=== Order Confirmation Page Back Home Button test completed ===");
+        });
 
 
     })

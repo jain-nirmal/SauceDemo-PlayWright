@@ -24,45 +24,68 @@ test.describe('Product Page Tests',()=>
 })
 
 test('@SmokeTesting @LogOut @Sanity Logout from application',async ({page})=>{
-    console.log("=== Starting logout test ===");
-    
-    await productPage.logOutFromApplication();
-    await expect(page).toHaveURL('https://www.saucedemo.com/');
-    console.log("=== Logout test completed ===");
+    await test.step('Click logout from menu', async () => {
+        console.log("=== Starting logout test ===");
+        await productPage.logOutFromApplication();
+    });
+
+    await test.step('Verify redirect to login page', async () => {
+        await expect(page).toHaveURL('https://www.saucedemo.com/');
+        console.log("=== Logout test completed ===");
+    });
 })
 
 test('@productpage @Sanity Navigate to About page from product page',async ({page})=>{
-    console.log("=== Starting navigate to About page test ===");
-    
-    await productPage.navigateToAboutPage();
-     await expect(productPage.tryFreebutton).toBeVisible();
-    await expect(productPage.requestDemoButton).toBeVisible();
-    console.log("=== Navigate to About page test completed ===");
+    await test.step('Navigate to About page from menu', async () => {
+        console.log("=== Starting navigate to About page test ===");
+        await productPage.navigateToAboutPage();
+    });
+
+    await test.step('Verify About page elements are visible', async () => {
+        await expect(productPage.tryFreebutton).toBeVisible();
+        await expect(productPage.requestDemoButton).toBeVisible();
+        console.log("=== Navigate to About page test completed ===");
+    });
 })
 
 
 test('@Sanity Validate product order when soted by Name A to Z',async ({page})=>{
-    console.log("=== Starting product sort test ===");
-   
-    const productNamesBeforeSort = await productPage.geteProductNamesList();
-    console.log("Product names before sort :"+productNamesBeforeSort);
-    await productPage.sortProductBy('Name (A to Z)');
-    const sortedProductNames =[...productNamesBeforeSort].sort();
-    expect(productNamesBeforeSort).toEqual(sortedProductNames);
-    console.log("=== Product sort test completed ===");
+    await test.step('Get product names before sorting', async () => {
+        console.log("=== Starting product sort test ===");
+        const productNamesBeforeSort = await productPage.geteProductNamesList();
+        console.log("Product names before sort :"+productNamesBeforeSort);
+    });
+
+    await test.step('Sort products by Name A to Z', async () => {
+        await productPage.sortProductBy('Name (A to Z)');
+    });
+
+    await test.step('Verify products are sorted correctly', async () => {
+        const productNamesBeforeSort = await productPage.geteProductNamesList();
+        const sortedProductNames =[...productNamesBeforeSort].sort();
+        expect(productNamesBeforeSort).toEqual(sortedProductNames);
+        console.log("=== Product sort test completed ===");
+    });
 })
 
 test('@Sanity Validate product order when soted by Name Z to A',async ({page})=>{
-    console.log("=== Starting product sort Z to A test ===");
-    
-    const productNamesBeforeSort = await productPage.geteProductNamesList();
-    console.log("Product names before sort :"+productNamesBeforeSort);
-    await productPage.sortProductBy('Name (Z to A)');
-    const sortedProductNames =[...productNamesBeforeSort].sort().reverse();
-    console.log("Product names after sort :"+sortedProductNames);
-     expect(productNamesBeforeSort).not.toEqual(sortedProductNames);
-    console.log("=== Product sort Z to A test completed ===");
+    await test.step('Get product names before sorting', async () => {
+        console.log("=== Starting product sort Z to A test ===");
+        const productNamesBeforeSort = await productPage.geteProductNamesList();
+        console.log("Product names before sort :"+productNamesBeforeSort);
+    });
 
+    await test.step('Sort products by Name Z to A', async () => {
+        await productPage.sortProductBy('Name (Z to A)');
+    });
+
+    await test.step('Verify products are sorted in reverse order', async () => {
+        const productNamesBeforeSort = await productPage.geteProductNamesList();
+        const sortedProductNames =[...productNamesBeforeSort].sort().reverse();
+        console.log("Product names after sort :"+sortedProductNames);
+        expect(productNamesBeforeSort).not.toEqual(sortedProductNames);
+        console.log("=== Product sort Z to A test completed ===");
+    });
 })
 
 test('@Sanity Validate product order when soted by price high to low',async ({page})=>{
