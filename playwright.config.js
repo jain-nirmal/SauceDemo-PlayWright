@@ -7,10 +7,9 @@ const config = {
   testDir: './tests',
   workers: 1,
   fullyParallel: true,
-  screensots: 'only-on-failure',
+  screenshot: 'only-on-failure',
   trace: 'on',
-  reporter: 'html',
-   video: 'on-failure', // or 'retain-on-failure'
+  video: 'on-failure', // or 'retain-on-failure'
   
  
 
