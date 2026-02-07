@@ -6,6 +6,7 @@ const { permission } = require('node:process');
 const config = {
   testDir: './tests',
   workers: 1,
+  fullyParallel: true,
  
 
   

@@ -1,0 +1,31 @@
+=== Initializing loginPage ===
+loginPage initialized successfully
+=== Initializing productPage ===
+productPage initialized successfully
+=== Initializing cartPage ===
+cartPage initialized successfully
+=== Test setup: beforeEach ===
+Navigated to: https://www.saucedemo.com
+=== Starting login process ===
+=== Entering username ===
+Username: standard_user
+Username filled successfully
+=== Entering password ===
+Password filled successfully
+=== Clicking login button ===
+Login button clicked
+Page loaded successfully after login
+=== Test setup completed ===
+=== Starting Remove Product from Cart test ===
+=== Adding product to cart: Sauce Labs Backpack ===
+Total products on page: 6
+Product found at index: 0
+Product added to cart successfully
+=== Getting shopping cart product count ===
+Products in cart: 1
+=== Starting to remove products from cart ===
+Final cart count after removal: 0
+Removing 1 products from cart
+Removing product at index: 0
+Product at index 0 removed
+All products removed from cart
