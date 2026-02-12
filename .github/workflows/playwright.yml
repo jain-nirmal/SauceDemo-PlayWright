@@ -1,12 +1,19 @@
-name: Playwright Tests Git HubActions Workflow
+name: Playwright Tests 
 
 on:
   push:
+    branches: [main]
+  pull_request:
     branches: [main]
 
 jobs:
   playwright-tests:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        shard: [1,2,3]
+
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
@@ -14,6 +21,10 @@ jobs:
         with:
           node-version: '18'
       - name: Install dependencies
-        run: npm install
-      - name: Run Playwright tests
-        run: npx playwright test
+        run: npm ci
+        
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+     
+      - name: Run Playwright test (Shard ${{ matrix.shard }})
+        run: npx playwright test --shard=${{ matrix.shard }}/3

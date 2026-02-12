@@ -15,7 +15,8 @@ class LoginPage{
         console.log("=== Navigating to login page ===");
         await this.page.goto(url);
         console.log("Navigated to: " + url);
-    }
+        console.log("Navigated to: " + url);
+    } 
 
     // Enter username
     async enterUsername(username){

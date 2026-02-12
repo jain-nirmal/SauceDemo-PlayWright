@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/LoginPage';
-import { ProductPage } from '../../pages/productPage';
+import { ProductPage } from '../../pages/ProductPage';
 import { CartPage } from '../../pages/CartPage';
 import { OrderProcess } from '../../pages/OrderProcess';
 import { OrderReviewPage } from '../../pages/OrderReview';
@@ -8,6 +8,8 @@ import { OrderConfirmationPage } from '../../pages/OrderConfirmation';
 import { BaseURL, Username, Password } from '../../utils/envConfig';
 
 const testData = require('../../testdata/checkOutTestData.json')
+
+// Make changes in this file to add end to end test scenarios covering complete business scenarios like placing an order from product catalog page, validating order details on order review page, validating order confirmation details on order confirmation page etc.
 
 
 
