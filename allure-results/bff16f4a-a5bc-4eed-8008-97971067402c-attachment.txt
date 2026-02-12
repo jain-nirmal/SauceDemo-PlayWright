@@ -1,0 +1,18 @@
+=== Initializing loginPage ===
+loginPage initialized successfully
+=== Navigating to login page ===
+=== Page launched sucessfully===
+=== Test setup: beforeEach ===
+=== Test: Login with valid credentials (standard_user) ===
+=== Starting login process ===
+=== Entering username ===
+Username: standard_user
+Username filled successfully
+=== Entering password ===
+Password filled successfully
+=== Clicking login button ===
+Navigated to: https://www.saucedemo.com
+Login button clicked
+Page loaded successfully after login
+Login completed
+=== Test PASSED: Successfully logged in and redirected to inventory page ===

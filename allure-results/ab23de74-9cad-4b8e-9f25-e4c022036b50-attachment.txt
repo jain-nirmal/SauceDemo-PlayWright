@@ -1,0 +1,36 @@
+=== Initializing loginPage ===
+loginPage initialized successfully
+=== Initializing productPage ===
+productPage initialized successfully
+=== Initializing cartPage ===
+cartPage initialized successfully
+OrderProcessPage initialized successfully
+=== Test setup: beforeEach ===
+Navigated to: https://www.saucedemo.com
+=== Starting login process ===
+=== Entering username ===
+Username: standard_user
+Username filled successfully
+=== Entering password ===
+Password filled successfully
+=== Clicking login button ===
+Login button clicked
+Page loaded successfully after login
+=== Adding first two products to cart ===
+First product name: async textContent(options) {
+    return await this._frame.textContent(this._selector, { strict: true, ...options });
+  }
+Product added to cart successfully
+=== Test setup completed ===
+=== Starting Continue Button Functionality test ===
+Mytest Data firstName: "Donesh"
+Mytest Data lastName: "Bhaskar"
+Mytest Data postalCode: "12345"
+=== Entering checkout information ===
+First Name: Donesh
+Last Name: Bhaskar
+Postal Code: 12345
+Checkout information entered successfully
+=== Clicking Continue button on Checkout Page ===
+Continue button clicked successfully
+=== Continue Button Functionality test completed ===

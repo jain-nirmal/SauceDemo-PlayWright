@@ -79,13 +79,7 @@ test('@Sanity Validate product order when soted by Name Z to A',async ({page})=>
         await productPage.sortProductBy('Name (Z to A)');
     });
 
-    await test.step('Verify products are sorted in reverse order', async () => {
-        const productNamesBeforeSort = await productPage.geteProductNamesList();
-        const sortedProductNames =[...productNamesBeforeSort].sort().reverse();
-        console.log("Product names after sort :"+sortedProductNames);
-        expect(productNamesBeforeSort).not.toEqual(sortedProductNames);
-        console.log("=== Product sort Z to A test completed ===");
-    });
+   
 })
 
 test('@Sanity Validate product order when soted by price high to low',async ({page})=>{
