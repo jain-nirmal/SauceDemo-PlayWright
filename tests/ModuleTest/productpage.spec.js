@@ -1,5 +1,5 @@
 import {test,expect} from '@playwright/test';
-import {LoginPage} from '../../pages/LoginPage_old';
+import {LoginPage} from '../../pages/LoginPage';
 import {ProductPage} from '../../pages/ProductPage';
 import { BaseURL, Username, Password } from '../../utils/envConfig';
 
