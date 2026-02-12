@@ -9,6 +9,8 @@ import { BaseURL, Username, Password } from '../../utils/envConfig';
 
 const testData = require('../../testdata/checkOutTestData.json')
 
+// Make changes in this file to add end to end test scenarios covering complete business scenarios like placing an order from product catalog page, validating order details on order review page, validating order confirmation details on order confirmation page etc.
+
 
 
 test('@end-2-end Place an order for sigle product from prodcuct catalgo page', async ({ page }) => {
