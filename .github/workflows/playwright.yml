@@ -21,6 +21,10 @@ jobs:
         with:
           node-version: '18'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+        
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+     
       - name: Run Playwright test (Shard ${{ matrix.shard }})
         run: npx playwright test --shard=${{ matrix.shard }}/3
