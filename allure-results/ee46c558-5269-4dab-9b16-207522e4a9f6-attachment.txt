@@ -1,0 +1,22 @@
+=== Test setup: beforeEach ===
+=== Initializing productPage ===
+productPage initialized successfully
+=== Initializing loginPage ===
+loginPage initialized successfully
+Navigated to: https://www.saucedemo.com
+=== Starting login process ===
+=== Entering username ===
+Username: standard_user
+Username filled successfully
+=== Entering password ===
+Password filled successfully
+=== Clicking login button ===
+Login button clicked
+Page loaded successfully after login
+=== Test setup completed ===
+=== Starting logout test ===
+=== Logging out from application ===
+Menu icon clicked
+Logout link clicked
+Logged out successfully
+=== Logout test completed ===
