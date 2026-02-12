@@ -1,5 +1,5 @@
 import {test,expect} from '@playwright/test';
-const {LoginPage} = require('../../pages/LoginPage');
+const {LoginPage} = require('../../pages/HomePage');
 import { BaseURL, Username, Password } from '../../utils/envConfig';
 
 // ================== POSITIVE TEST SCENARIOS ==================

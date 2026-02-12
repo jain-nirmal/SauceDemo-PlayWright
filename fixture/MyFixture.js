@@ -1,5 +1,5 @@
 const base = require('@playwright/test')
-const {LoginPage} = require('../pages/LoginPage')
+const {LoginPage} = require('../pages/HomePage')
 const {ProductPage} = require('../pages/ProductPage')
 const {CartPage}=require('../pages/CartPage')
 
