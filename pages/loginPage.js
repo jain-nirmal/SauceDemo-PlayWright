@@ -8,6 +8,7 @@ class LoginPage{
         this.errorMessage=page.locator('[data-test="error"]');
         this.appLogo=page.locator('.login_logo');
         console.log("loginPage initialized successfully");
+        console.log("=== LoginPage constructor completed ===");
     }   
 
     // Navigate to login page
