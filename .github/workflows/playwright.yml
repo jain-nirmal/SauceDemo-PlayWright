@@ -28,3 +28,22 @@ jobs:
      
       - name: Run Playwright test (Shard ${{ matrix.shard }}) with XVFB
         run: xvfb-run --auto-servernum -- npx playwright test --shard=${{ matrix.shard }}/3
+
+      - name: upload Allure Results (Shard ${{ matrix.shard }})
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-shard-${{ matrix.shard }}
+          path: allure-results
+
+
+  merge-allure-results:
+    needs: playwright-tests
+    if: always() # Run this job even if the previous one fails
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code 
+        uses: actions/checkout@v4
+        with:
+          name: allure-results-shard-1
+        
