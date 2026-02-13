@@ -51,7 +51,7 @@ const config = {
     {
       name: 'Chrome',
       use: { browserName : 'chromium',
-        headless: false,
+        headless: true,
         screenshot : 'on',
         trace : 'on',//off,on  
         ignoreHTTPSErrors: true,
