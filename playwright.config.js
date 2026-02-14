@@ -1,81 +1,60 @@
-// @ts-check
-const { devices } = require('@playwright/test');
-const { worker } = require('node:cluster');
-const { permission } = require('node:process');
+// playwright.config.js
+import { defineConfig, devices } from '@playwright/test';
 
-const config = {
+export default defineConfig({
   testDir: './tests',
-  workers: 1,
+  
+  // Timeout configuration
+  timeout: 30000,
+  
+  // Test execution settings
   fullyParallel: true,
-  screenshot: 'only-on-failure',
-  trace: 'on',
-  video: 'on-failure', // or 'retain-on-failure'
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 4 : undefined,
   
- 
-
-  
-  /* Maximum time one test can run for. */
-  timeout: 30 * 1000,
-  expect: {
-    timeout: 5000
-  },
-  
- // Add Allure reporter configuration
-   reporter: [
-    ['html'],
-    ['allure-playwright', {
-      detail: true,
-      outputFolder: 'allure-results',
-      suiteTitle: false,
-      categories: [
-        {
-          name: "Smoke Tests",
-          matchedStatuses: ["failed", "broken"]
-        },
-        {
-          name: "Login Tests",
-          matchedStatuses: ["failed"]
-        }
-      ],
-      environmentInfo: {
-        Project: 'SauceDemo Automation',
-        E2E_NODE_VERSION: process.version,
-        E2E_OS: process.platform
-      }
-    }]
+  // Reporter configuration
+  reporter: [
+    ['html', { outputFolder: 'playwright-report', open: 'never' }],
+    ['json', { outputFile: 'test-results/results.json' }],
+    ['junit', { outputFile: 'test-results/junit.xml' }],
+    ['list'],
   ],
+  
+  use: {
+    // ⭐ Critical for EC2/GitHub Actions
+    headless: true,
+    
+    // Browser launch options for AWS EC2
+    launchOptions: {
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--disable-accelerated-2d-canvas',
+        '--no-first-run',
+        '--no-zygote',
+      ],
+    },
+    
+    // Base URL
+  //  baseURL: process.env.BASE_URL || 'https://www.saucedemo.com',
+    
+    // Action timeout
+    actionTimeout: 15000,
+    
+    // Screenshot and video
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    trace: 'retain-on-failure',
+  },
 
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-
-  projects :[
+  // Projects for different browsers
+  projects: [
     {
-      name: 'Chrome',
-      use: { browserName : 'chromium',
-        headless: true,
-        screenshot : 'on',
-        trace : 'on',//off,on  
-        ignoreHTTPSErrors: true,
-        worker:4,
-        retries:1
-      
-       
-      }
-       }
-    /*   {
-      name: 'Firefox',
-      use: { browserName : 'firefox',
-        headless: false,
-        screenshot : 'on',
-        trace : 'on',//off,on  
-        ignoreHTTPSErrors: true,
-        worker:4
-      
-       
-      }
-       } */]
-
-
-};
-
-module.exports = config;
-
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
+  ],
+});

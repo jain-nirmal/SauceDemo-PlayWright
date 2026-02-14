@@ -1,0 +1,105 @@
+name: Playwright Tests on AWS EC2
+
+on:
+
+  
+  # Trigger on pull request
+  pull_request:
+    branches: [ main ]
+  
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to test'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+  
+  # Scheduled run (nightly at 2 AM UTC)
+  schedule:
+    - cron: '0 2 * * *'
+
+# Environment variables
+env:
+  NODE_VERSION: '18'
+  PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/ms-playwright
+
+jobs:
+  test:
+    name: Run Playwright Tests
+    runs-on: self-hosted  # ⭐ This targets your EC2 runner
+    timeout-minutes: 60
+    
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      # Step 2: Setup Node.js
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm ci
+      
+      # Step 4: Install Playwright browsers
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium --with-deps
+      
+      # Step 5: Run Playwright tests
+      - name: Run Playwright Tests
+        run: npx playwright test
+        env:
+          CI: true
+          BASE_URL: ${{ github.event.inputs.environment == 'production' && secrets.PROD_BASE_URL || secrets.STAGING_BASE_URL }}
+      
+      # Step 6: Upload HTML report
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-${{ github.run_number }}
+          path: playwright-report/
+          retention-days: 30
+      
+      # Step 7: Upload test results
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-results-${{ github.run_number }}
+          path: test-results/
+          retention-days: 7
+      
+      # Step 8: Upload videos (on failure)
+      - name: Upload Videos
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-videos-${{ github.run_number }}
+          path: test-results/**/*.webm
+          retention-days: 7
+      
+      # Step 9: Publish test results
+      - name: Publish Test Results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Playwright Test Results
+          path: test-results/junit.xml
+          reporter: java-junit
+      
+      # Step 10: Comment on PR with results
+      - name: Comment Test Results on PR
+        uses: daun/playwright-report-comment@v3
+        if: always() && github.event_name == 'pull_request'
+        with:
+          report-url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
