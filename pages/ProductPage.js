@@ -7,8 +7,8 @@ class ProductPage {
         this.menuIcon = page.locator('#react-burger-menu-btn');
         this.logOutLink = page.locator('#logout_sidebar_link');
         this.AboutLink = page.locator('#about_sidebar_link');
-        this.requestDemoButton = page.locator('button:has-text("Request a demo")');
-        this.tryFreebutton = page.locator('button:has-text("Try it free")');
+        this.requestDemoButton = page.locator('button:has-text("Request a demo")').first();
+        this.tryFreebutton = page.locator('button:has-text("Try it free")').first();
         this.productCard = page.locator('.inventory_item');
         this.productName = page.locator('.inventory_item_name');
         this.shoppingCartLink = page.locator('.shopping_cart_link');

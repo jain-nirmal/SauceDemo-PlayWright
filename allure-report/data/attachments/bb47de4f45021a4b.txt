@@ -1,0 +1,6 @@
+=== Starting login test (loginTest.spec.js) ===
+Navigated to login page
+Username filled
+Password filled
+Login button clicked
+=== Login test completed successfully ===
