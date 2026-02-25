@@ -1,0 +1,21 @@
+=== Initializing loginPage ===
+loginPage initialized successfully
+=== LoginPage constructor completed ===
+=== Navigating to login page ===
+=== Page launched sucessfully===
+=== Test setup: beforeEach ===
+=== Test: Session persists across page refresh ===
+=== Starting login process ===
+=== Entering username ===
+Username: standard_user
+Navigated to: https://www.saucedemo.com
+Navigated to: https://www.saucedemo.com
+Username filled successfully
+=== Entering password ===
+Password filled successfully
+=== Clicking login button ===
+Login button clicked
+Page loaded successfully after login
+Logged in successfully
+Page refreshed
+=== Test PASSED: Session persists after page refresh ===
